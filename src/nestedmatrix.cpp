@@ -126,7 +126,7 @@ NestedMatrix::Bridge::Bridge(NestedMatrix* matrix, size_t peak, bool incoming, b
 		m_position = 0;
 	
 	// Ищем первую вершину, с которой текущая вершина связана дугой
-	while (m_position < matrix->peak_count() && isnan(current_weight()))
+	while (m_position == m_peak || (m_position < matrix->peak_count() && isnan(current_weight())))
 		m_position++;
 }
 
@@ -136,7 +136,7 @@ void NestedMatrix::Bridge::next()
 	do
 	{
 		m_position++;
-	} while (m_position < m_matrix->peak_count() && isnan(current_weight()));
+	} while (m_position == m_peak || (m_position < m_matrix->peak_count() && isnan(current_weight())));
 }
 
 bool NestedMatrix::Bridge::equals(ArcBridge* other)
